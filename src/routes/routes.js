@@ -34,7 +34,7 @@ function verifyJWT(req, res, next){
 //----------------------------------fim token----------------------------------------------------
 
 //Busca Token
-router.post('/login', (req, res, next) => {
+router.post('/get-token', (req, res, next) => {
     if(req.body.user === 'xxtgs627683yshjsb872gd_nix*' && req.body.pwd === 'kkbecuix_jwedbxiw62734782bxib9823gsdgxxx_'){
       //auth ok
       const id = 1; //esse id viria do banco de dados
@@ -47,11 +47,12 @@ router.post('/login', (req, res, next) => {
     res.status(500).send('Login inválido!');
 })
 
-router.get('/logout', function(req, res) {
+router.get('/discard-token', function(req, res) {
     res.status(200).send({ auth: false, token: null });
 });
 
 //Atividade
+router.get('/atividade/nicho/:NichoID',verifyJWT, atividadeController.getAtividadeByNicho)
 router.get('/atividade/:NomeAtividade',verifyJWT, atividadeController.getAtividade)
 router.post('/atividade',verifyJWT, atividadeController.postAtividade)
 router.delete('/atividade/:NomeAtividade',verifyJWT, atividadeController.deleteAtividade)
@@ -68,6 +69,7 @@ router.post('/bairro',verifyJWT, bairroController.postBairro)
 router.delete('/bairro/:BairroID',verifyJWT, bairroController.deleteBairro)
 
 //Cidade
+router.get('/cidade',verifyJWT, cidadeController.getAllCidade)
 router.get('/cidade/:CidadeID',verifyJWT, cidadeController.getCidade)
 router.get('/buscacidade/:NomeCidade',verifyJWT, cidadeController.getBuscaCidade)
 router.post('/cidade',verifyJWT, cidadeController.postCidade)
@@ -98,9 +100,10 @@ router.post('/logradouro',verifyJWT, logradouroController.postLogradouro)
 router.delete('/logradouro/:LogradouroID',verifyJWT, logradouroController.deleteLogradouro)
 
 //Nicho
-router.get('/atividade/:NomeNicho',verifyJWT,nichoController.getNicho )
-router.post('/atividade',verifyJWT, nichoController.postNicho)
-router.delete('/atividade/:NichoID',verifyJWT, nichoController.deleteNicho)
+router.get('/nicho',verifyJWT,nichoController.getaAllNicho )
+router.get('/nicho/:NomeNicho',verifyJWT,nichoController.getNicho )
+router.post('/nicho',verifyJWT, nichoController.postNicho)
+router.delete('/nicho/:NichoID',verifyJWT, nichoController.deleteNicho)
 
 //Pessoa
 router.get('/pessoa/:CPF',verifyJWT,pessoaController.getPessoa)
@@ -115,6 +118,7 @@ router.post('/registro',verifyJWT, registroController.postRegistro)
 router.delete('/registro/:RegistroID',verifyJWT, registroController.deleteRegistro)
 
 //TipoViagem
+router.get('/tipoviagem/:NomeTipo',verifyJWT, tipoViagemController.getTipoViagem)
 router.get('/tipoviagemusuario/:UsuarioID',verifyJWT, tipoViagemController.getTipoviagem_Usuario)
 router.get('/tipoviagem/:TipoViagemID',verifyJWT, tipoViagemController.getTipoviagem)
 router.post('/tipoviagem',verifyJWT, tipoViagemController.postTipoviagem)

@@ -1,9 +1,10 @@
 var knex = require('knex')({
     client: 'mysql',
     connection: {
-        host : 'localhost',      
+        host : 'localhost',
+        port: '3306',      
         user : 'root',       
-        password : '1234',  
+        password : 'Teste@@123',  
         database : 'sllips'       
      }
 });

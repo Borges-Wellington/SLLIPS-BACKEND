@@ -2,6 +2,15 @@ const database = require('../database/connection')
 
 class cidadeController {
 
+    getAllCidade(request,response){
+        database.select("*").table("cidade").then(retorno=>{
+            console.log("cidade", retorno)
+            response.json(retorno)
+        }).catch(error=>{
+            console.log(error)
+        })
+    } 
+
     getCidade(request,response){
         const dados = request.params
         console.log(dados.BairroID)
