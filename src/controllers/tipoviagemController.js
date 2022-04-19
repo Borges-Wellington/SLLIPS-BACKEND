@@ -32,12 +32,46 @@ class registroController {
     }
   }
 
+  getViagemHospedagem(request, response) {
+    const dados = request.params;
+    console.log(dados.NomeHospedagem);
+    if (dados.NomeHospedagem == "*") {
+      database
+        .select("*")
+        .table("hospedagem")
+        .then((retorno) => {
+          console.log("todos");
+          console.log(retorno);
+          response.json(retorno);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      database
+        .select("*")
+        .table("hospedagem")
+        .where({ NomeHospedagem: dados.NomeHospedagem })
+        .then((retorno) => {
+          console.log("atividade");
+          console.log(retorno);
+          response.json(retorno);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
+
+
   getTipoviagem_Usuario(request, response) {
     const dados = request.params;
     console.log(dados.UsuarioID);
     database
       .select("*")
-      .table("tipo_viagem")
+      .table("viagem")
+      .innerJoin("cidade", "viagem.CidadeIDDestino", "cidade.CidadeID")
+      .innerJoin("tipo", "viagem.TipoID", "tipo.TipoID")
       .where({ UsuarioID: dados.UsuarioID })
       .then((retorno) => {
         console.log("tipo viagem usu");
@@ -55,7 +89,7 @@ class registroController {
     if (dados.TipoViagemID == "*") {
       database
         .select("*")
-        .table("tipo_viagem")
+        .table("viagem")
         .then((retorno) => {
           console.log("todos");
           console.log(retorno);
@@ -67,7 +101,7 @@ class registroController {
     } else {
       database
         .select("*")
-        .table("tipo_viagem")
+        .table("viagem")
         .where({ TipoViagemID: dados.TipoViagemID })
         .then((retorno) => {
           console.log("tipo viagem");
@@ -84,7 +118,7 @@ class registroController {
     const insertData = request.body;
     database
       .insert(insertData)
-      .into("tipo_viagem")
+      .into("viagem")
       .then((data) => {
         console.log({ insert: "OK" });
         response.send({ insert: "OK" });
@@ -99,7 +133,7 @@ class registroController {
     const dados = request.params;
     console.log(dados.TipoViagemID);
     database
-      .table("tipo_viagem")
+      .table("viagem")
       .where({ TipoViagemID: dados.TipoViagemID })
       .del()
       .then((data) => {

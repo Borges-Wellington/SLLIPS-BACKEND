@@ -26,6 +26,7 @@ class usuarioController {
     database
       .select("*")
       .table("usuario")
+      .innerJoin("pessoa", "usuario.PessoaID", "pessoa.PessoaID")
       .where({ UsuarioID: dados.UsuarioID })
       .then((retorno) => {
         console.log("usuario");

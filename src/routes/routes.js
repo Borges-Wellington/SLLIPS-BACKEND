@@ -119,6 +119,7 @@ router.delete('/registro/:RegistroID',verifyJWT, registroController.deleteRegist
 
 //TipoViagem
 router.get('/tipoviagem/:NomeTipo',verifyJWT, tipoViagemController.getTipoViagem)
+router.get('/tipoviagem/hospedagem/:NomeHospedagem',verifyJWT, tipoViagemController.getViagemHospedagem)
 router.get('/tipoviagemusuario/:UsuarioID',verifyJWT, tipoViagemController.getTipoviagem_Usuario)
 router.get('/tipoviagem/:TipoViagemID',verifyJWT, tipoViagemController.getTipoviagem)
 router.post('/tipoviagem',verifyJWT, tipoViagemController.postTipoviagem)
