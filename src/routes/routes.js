@@ -113,6 +113,7 @@ router.delete('/pessoa/:PessoaID',verifyJWT, pessoaController.deletePesoa)
 
 //Registro
 router.get('/registrousuario/:LogradouroID',verifyJWT, registroController.getRegistro_Usuario)
+router.get('/registro/:ViagemID',verifyJWT, registroController.getRegistro_Viagem)
 router.get('/registroestabelecimento/:EstabelecimentoID',verifyJWT, registroController.getRegistro_Estabelecimento)
 router.post('/registro',verifyJWT, registroController.postRegistro)
 router.delete('/registro/:RegistroID',verifyJWT, registroController.deleteRegistro)

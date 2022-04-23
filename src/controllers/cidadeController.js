@@ -25,7 +25,7 @@ class cidadeController {
 
     getBuscaCidade(request,response){
         const dados = request.params
-        console.log(dados.NomeBairro)
+        console.log(dados.NomeCidade)
         if(dados.NomeCidade == "*" ) {
             database.select("*").table("cidade").then(retorno=>{
                 console.log("todos")
