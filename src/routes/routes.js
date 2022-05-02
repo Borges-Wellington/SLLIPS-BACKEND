@@ -83,6 +83,7 @@ router.delete('/contato/:ContatoID',verifyJWT, contatoController.deleteContato)
 
 //Estabelecimento
 router.get('/estabelecimento/:EstabelecimentoID',verifyJWT, estabelecimentoController.getEstabelecimento)
+router.get('/estabelecimento/usuario/:UsuarioID',verifyJWT, estabelecimentoController.getEstabelecimentoUsuario)
 router.get('/buscaestabelecimento/:NomeEstabelecimento',verifyJWT, estabelecimentoController.getBuscaEstabelecimento)
 router.post('/estabelecimento',verifyJWT, estabelecimentoController.postEstabelecimento)
 router.delete('/estabelecimento/:EstabelecimentoID',verifyJWT, estabelecimentoController.deleteEstabelecimento)

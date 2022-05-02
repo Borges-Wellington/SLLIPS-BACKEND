@@ -8,7 +8,6 @@ class usuarioController {
     database
       .select("*")
       .table("usuario")
-      .innerJoin("estabelecimento", "usuario.UsuarioID", "estabelecimento.UsuarioID")
       .where({ Login: dados.Login, Senha: dados.Senha })
       .then((retorno) => {
         console.log("usuario");

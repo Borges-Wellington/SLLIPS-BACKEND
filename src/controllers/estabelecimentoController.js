@@ -12,6 +12,18 @@ class estabelecimentoController {
         }).catch(error=>{
             console.log(error)
         })
+    } 
+
+    getEstabelecimentoUsuario(request,response){
+        const dados = request.params
+        console.log(dados.UsuarioID)
+        database.select("*").table("estabelecimento").where({UsuarioID: dados.UsuarioID}).then(retorno=>{
+            console.log("estabelecimento")
+            console.log(retorno)
+            response.json(retorno)
+        }).catch(error=>{
+            console.log(error)
+        })
     }
 
     getBuscaEstabelecimento(request,response){
