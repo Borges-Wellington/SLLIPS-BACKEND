@@ -39,15 +39,17 @@ class usuarioController {
 
   alterarSenha(request, response) {
     const dados = request.body;
-    console.log(dados.UsuarioID);
-    console.log(dados.NovaSenha);
+    console.log(dados.cpf);
+    console.log(dados.email);
+    console.log(dados.novasenha);
     database
       .table("usuario")
-      .where({ UsuarioID: dados.UsuarioID })
-      .update({ Senha: dados.Senha })
+      .where({ Cpf: dados.cpf, Login: dados.email })
+      .innerJoin("pessoa", "usuario.PessoaID", "pessoa.PessoaID")
+      .update({ Senha: dados.novasenha })
       .then((data) => {
-        console.log({ Update: "OK" });
-        response.send({ Update: "OK" });
+        console.log({ Update: "OK", dados: data });
+        response.send({ Update: "OK", dados: data });
       })
       .catch((err) => {
         console.log(err);

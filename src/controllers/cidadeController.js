@@ -13,7 +13,7 @@ class cidadeController {
 
     getCidade(request,response){
         const dados = request.params
-        console.log(dados.BairroID)
+        console.log(dados.CidadeID)
         database.select("*").table("cidade").where({CidadeID: dados.CidadeID}).then(retorno=>{
             console.log("cidade")
             console.log(retorno)
