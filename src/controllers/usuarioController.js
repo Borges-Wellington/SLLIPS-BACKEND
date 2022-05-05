@@ -61,7 +61,7 @@ class usuarioController {
     const insertData = request.body;
     try {
       database
-        .insert({ Nome: insertData.Nome })
+        .insert({ Nome: insertData.Nome, Cpf: insertData.Cpf })
         .returning("PessoaID")
         .into("pessoa")
         .then((PessoaID) => {
