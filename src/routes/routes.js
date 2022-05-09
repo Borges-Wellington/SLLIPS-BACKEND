@@ -107,7 +107,8 @@ router.post('/nicho',verifyJWT, nichoController.postNicho)
 router.delete('/nicho/:NichoID',verifyJWT, nichoController.deleteNicho)
 
 //Pessoa
-router.get('/pessoa/:CPF',verifyJWT,pessoaController.getPessoa)
+router.get('/pessoa/cpf/:CPF',verifyJWT,pessoaController.getPessoaCPF)
+router.get('/pessoa/:PessoaID',verifyJWT,pessoaController.getPessoa)
 router.post('/pessoa',verifyJWT, pessoaController.postPessoa)
 router.put('/pessoa',verifyJWT, pessoaController.putPessoa)
 router.delete('/pessoa/:PessoaID',verifyJWT, pessoaController.deletePesoa)
@@ -133,5 +134,6 @@ router.get('/usuario/:UsuarioID',verifyJWT, usuarioController.getUsuario)
 router.post('/usuario',verifyJWT, usuarioController.postUsuario)
 router.delete('/usuario/:UsuarioID',verifyJWT, usuarioController.deleteUsuario)
 router.put('/alterarsenha',verifyJWT, usuarioController.alterarSenha)
+router.put('/usuario',verifyJWT, usuarioController.putUsuario)
 
 module.exports = router

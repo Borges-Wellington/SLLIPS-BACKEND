@@ -92,6 +92,42 @@ class usuarioController {
       response.send(err);
     }
   }
+  putUsuario(request, response) {
+    const insertData = request.body;
+    
+    try {
+      database
+        .insert({ Nome: insertData.Nome, Cpf: insertData.Cpf })
+        .returning("PessoaID")
+        .into("pessoa")
+        .then((PessoaID) => {
+          console.log({ insert: "OK" });
+
+          database
+            .insert({
+              Login: insertData.Login,
+              Senha: insertData.Senha,
+              PessoaID: PessoaID,
+            })
+            .into("usuario")
+            .then((data) => {
+              console.log({ "insert user": "OK" });
+              response.send({ insert: "OK" });
+            })
+            .catch((err) => {
+              console.log(err);
+              response.send(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          response.send(err);
+        });
+    } catch (error) {
+      console.log(err);
+      response.send(err);
+    }
+  }
 
   deleteUsuario(request, response) {
     const dados = request.params;
