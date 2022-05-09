@@ -66,40 +66,58 @@ class registroController {
       today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dataagora = date + " " + time;
 
-    const ViagemID = 0;
     database
       .raw(
-        "select * from viagem where now() >= Checkin and now() <= Checkout and UsuarioID = ?;",
+        "select ViagemID from viagem where now() >= Checkin and now() <= Checkout and UsuarioID = ?;",
         [insertData.UsuarioID]
       )
       .then((retorno) => {
         console.log(retorno);
-        if (retorno.ViagemID != null) {
-          ViagemID = retorno.ViagemID;
+        
+        if (retorno[0] != '') {
+          
+          console.log('if ->');
+          var dados = retorno[0];
+          var IDviagem = dados[0].ViagemID;
+
+          database
+          .insert({
+            EstabelecimentoID: insertData.EstabelecimentoID,
+            UsuarioID: insertData.UsuarioID,
+            Valor: insertData.Valor,
+            DataHora: dataagora,
+            ViagemID: IDviagem,
+          })
+          .into("registro")
+          .then((data) => {
+            console.log({ insert: "OK" });
+            response.send({ insert: "OK" });
+          })
+
         } else {
-          ViagemID = 0;
+          
+          console.log('else ->');
+          
+          database
+          .insert({
+            EstabelecimentoID: insertData.EstabelecimentoID,
+            UsuarioID: insertData.UsuarioID,
+            Valor: insertData.Valor,
+            DataHora: dataagora,
+            ViagemID: 0,
+          })
+          .into("registro")
+          .then((data) => {
+            console.log({ insert: "OK" });
+            response.send({ insert: "OK" });
+          })
         }
+
+        response.send({ insert: "OK" });
       })
       .catch((error) => {
         console.log(error);
-      });
-
-    database
-      .insert({
-        EstabelecimentoID: insertData.EstabelecimentoID,
-        UsuarioID: insertData.UsuarioID,
-        Valor: insertData.Valor,
-        DataHora: dataagora,
-        ViagemID: ViagemID,
-      })
-      .into("registro")
-      .then((data) => {
-        console.log({ insert: "OK" });
-        response.send({ insert: "OK" });
-      })
-      .catch((err) => {
-        console.log(err);
-        response.send(err);
+        response.send(error);
       });
   }
 
