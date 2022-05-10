@@ -10,8 +10,8 @@ app.use(cors())
 app.use(express.json())
 app.use(router)
 
-app.listen(4000,()=>{
-    console.log("Aplicação rodando na porta 4000")
+app.listen(21329,()=>{
+    console.log("Aplicação rodando na porta 21329")
 })
 
 app.get('/',(request,response)=>{

@@ -19,6 +19,25 @@ class usuarioController {
       });
   }
 
+  getUsuarioDash(request, response) {
+    const dados = request.params;
+    console.log(dados.Login);
+    console.log(dados.Senha);
+    database
+      .select("*")
+      .table("usuario_dash")
+      .innerJoin("cidade", "usuario_dash.CidadeID", "cidade.CidadeID")
+      .where({ Login: dados.Login, Senha: dados.Senha })
+      .then((retorno) => {
+        console.log("usuario");
+        console.log(retorno);
+        response.json(retorno);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   getUsuario(request, response) {
     const dados = request.params;
     console.log(dados.UsuarioID);
