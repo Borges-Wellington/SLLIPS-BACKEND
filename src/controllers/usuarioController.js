@@ -93,40 +93,21 @@ class usuarioController {
     }
   }
   putUsuario(request, response) {
-    const insertData = request.body;
-    
-    try {
-      database
-        .insert({ Nome: insertData.Nome, Cpf: insertData.Cpf })
-        .returning("PessoaID")
-        .into("pessoa")
-        .then((PessoaID) => {
-          console.log({ insert: "OK" });
-
-          database
-            .insert({
-              Login: insertData.Login,
-              Senha: insertData.Senha,
-              PessoaID: PessoaID,
-            })
-            .into("usuario")
-            .then((data) => {
-              console.log({ "insert user": "OK" });
-              response.send({ insert: "OK" });
-            })
-            .catch((err) => {
-              console.log(err);
-              response.send(err);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
-          response.send(err);
-        });
-    } catch (error) {
-      console.log(err);
-      response.send(err);
-    }
+    const dados = request.body;
+    database
+      .table("usuario")
+      .where({ UsuarioID: dados.UsuarioID })
+      .update({
+        Nome: dados.Nome,
+      })
+      .then((data) => {
+        console.log({ update: "OK" });
+        response.send({ update: "OK" });
+      })
+      .catch((err) => {
+        console.log(err);
+        response.send(err);
+      });
   }
 
   deleteUsuario(request, response) {
