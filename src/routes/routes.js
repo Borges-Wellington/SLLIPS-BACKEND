@@ -135,5 +135,6 @@ router.post('/usuario',verifyJWT, usuarioController.postUsuario)
 router.delete('/usuario/:UsuarioID',verifyJWT, usuarioController.deleteUsuario)
 router.put('/alterarsenha',verifyJWT, usuarioController.alterarSenha)
 router.put('/usuario',verifyJWT, usuarioController.putUsuario)
+router.get('/getUsuarioDash/:Login/:Senha',verifyJWT, usuarioController.getUsuarioDash)
 
 module.exports = router
