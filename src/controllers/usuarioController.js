@@ -118,6 +118,7 @@ class usuarioController {
       .where({ UsuarioID: dados.UsuarioID })
       .update({
         Nome: dados.Nome,
+        Uri: dados.Uri,
       })
       .then((data) => {
         console.log({ update: "OK" });
