@@ -137,4 +137,37 @@ router.put('/alterarsenha',verifyJWT, usuarioController.alterarSenha)
 router.put('/usuario',verifyJWT, usuarioController.putUsuario)
 router.get('/getUsuarioDash/:Login/:Senha',verifyJWT, usuarioController.getUsuarioDash)
 
+//Painel BI
+//Inicio..... 
+const turistaParticularController = require('../controllers/dashboards/turistaParticularController')
+const nonibusController = require('../controllers/dashboards/nonibusController')
+const npassageirosController = require('../controllers/dashboards/npassageirosController')
+const ncheckinController = require('../controllers/dashboards/ncheckinController')
+const ncheckoutController = require('../controllers/dashboards/ncheckoutController')
+const nPrevisaoTuristaController = require('../controllers/dashboards/nPrevisaoTuristaController')
+const nPorEstadoController = require('../controllers/dashboards/nPorEstadoController')
+const nPorCidadeController = require('../controllers/dashboards/nPorCidadeController')
+const sexoturistaController = require('../controllers/dashboards/sexoturistaController')
+const tipopublicoController = require('../controllers/dashboards/tipopublicoController')
+const nvisitascovidController = require('../controllers/dashboards/nvisitasCovidController')
+const dadosExcursaoController = require('../controllers/dashboards/dadosexcurcaoController')
+const tipoTurismoController = require('../controllers/dashboards/tipoTurismoController')
+
+router.get('/NturistaParticular/:idcidade',verifyJWT, turistaParticularController.getTuristaparticular)
+router.get('/NOnibus/:idcidade',verifyJWT, nonibusController.getNonibus)
+router.get('/NPassageiros/:idcidade',verifyJWT, npassageirosController.getNpassageiros)
+router.get('/NCheckin/:idcidade',verifyJWT, ncheckinController.getNcheckin)
+router.get('/NCheckout/:idcidade',verifyJWT, ncheckoutController.getNcheckout)
+router.get('/previsaoTuristas/:idcidade',verifyJWT, nPrevisaoTuristaController.getprevisaoturista)
+router.get('/nporEstado/:idcidade',verifyJWT, nPorEstadoController.getNEstados)
+router.get('/nporCidade/:idcidade',verifyJWT, nPorCidadeController.getNCidades)
+router.get('/sexoTuristas/:idcidade',verifyJWT, sexoturistaController.getSexoTuristas)
+router.get('/tipoPublico/:idcidade',verifyJWT, tipopublicoController.gettipoPublico)
+router.get('/visitasCovid/:idcidade',verifyJWT, nvisitascovidController.getVisitasCovid)
+router.get('/dadosExcursao/:idcidade',verifyJWT, dadosExcursaoController.getDadosExcursao)
+router.get('/tipoTurismo/:idcidade',verifyJWT, tipoTurismoController.getTipoTurismo)
+
+//Fim....
+
+
 module.exports = router
